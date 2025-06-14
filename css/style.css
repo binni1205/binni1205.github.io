@@ -246,3 +246,164 @@ body {
         padding: 1.5rem;
     }
 }
+
+/* 推文样式 */
+.tweet-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tweet {
+    background: var(--pudding-background);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: var(--pudding-shadow);
+    transition: all 0.3s ease;
+}
+
+.tweet:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
+}
+
+.tweet-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.tweet-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 12px;
+    object-fit: cover;
+}
+
+.tweet-user-info {
+    flex: 1;
+}
+
+.tweet-username {
+    font-weight: bold;
+    color: var(--dark-blue);
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.tweet-handle {
+    color: var(--medium-blue);
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.tweet-time {
+    color: var(--medium-blue);
+    font-size: 0.9rem;
+}
+
+.tweet-content {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: var(--dark-blue);
+}
+
+.tweet-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.tweet-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tweet-image:hover {
+    transform: scale(1.02);
+}
+
+.tweet-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tweet-action {
+    display: flex;
+    align-items: center;
+    color: var(--medium-blue);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.tweet-action:hover {
+    color: var(--dark-blue);
+}
+
+.tweet-action i {
+    margin-right: 8px;
+}
+
+/* 图片查看器样式 */
+.image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.image-viewer.active {
+    display: flex;
+}
+
+.image-viewer img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.image-viewer-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1101;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .tweet-container {
+        padding: 10px;
+    }
+
+    .tweet {
+        padding: 15px;
+    }
+
+    .tweet-images {
+        grid-template-columns: 1fr;
+    }
+
+    .tweet-image {
+        height: 250px;
+    }
+}

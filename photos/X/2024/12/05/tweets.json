@@ -1,0 +1,16 @@
+[
+    {
+        "username": "BINNI",
+        "handle": "binni1205",
+        "avatar": "../images/default-avatar.png",
+        "timestamp": "2024-12-05T10:30:00",
+        "content": "今天天气真好，拍了一些照片分享给大家~",
+        "images": [
+            "../photo/X/24年/12月/5日/GeAPuvda0AkK4OZ.jpg",
+            "../photo/X/24年/12月/5日/GeAPuxLa0AALWCE.jpg"
+        ],
+        "replies": 5,
+        "retweets": 12,
+        "likes": 48
+    }
+]
