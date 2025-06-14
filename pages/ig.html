@@ -4,24 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BINNI - 个人网站</title>
+    <title>IG - BINNI</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <style>
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 
 <body>
     <!-- 顶部导航栏 -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="images/logo.png" alt="BINNI Logo" height="40" class="d-inline-block align-text-top">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="BINNI Logo" height="40" class="d-inline-block align-text-top">
             </a>
             <div class="ms-auto">
-                <img src="images/avatar.jpg" alt="Avatar" class="rounded-circle" height="40">
+                <img src="../images/avatar.jpg" alt="Avatar" class="rounded-circle" height="40">
             </div>
         </div>
     </nav>
@@ -37,16 +63,16 @@
                             <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
                                 <i class="fas fa-images"></i> 照片集
                             </a>
-                            <div class="collapse" id="photoSubmenu">
+                            <div class="collapse show" id="photoSubmenu">
                                 <ul class="nav flex-column ms-3">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/ig.html">IG</a>
+                                        <a class="nav-link active" href="ig.html">IG</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/wvs.html">WVS</a>
+                                        <a class="nav-link" href="wvs.html">WVS</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/x.html">X</a>
+                                        <a class="nav-link" href="x.html">X</a>
                                     </li>
                                 </ul>
                             </div>
@@ -69,10 +95,10 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
                 <div
                     class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">欢迎来到BINNI的网站</h1>
+                    <h1 class="h2">IG 照片集</h1>
                 </div>
-                <div class="content">
-                    <!-- 内容将在这里动态加载 -->
+                <div class="photo-grid">
+                    <!-- 这里将通过JavaScript动态加载照片 -->
                 </div>
             </main>
         </div>
@@ -81,7 +107,7 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
-    <script src="js/main.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>
