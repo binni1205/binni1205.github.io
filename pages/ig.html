@@ -44,10 +44,10 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
-                <img src="../images/default-logo.png" alt="BINNI Logo" class="d-inline-block align-text-top">
+                <img src="../images/default-avatar.jpg" alt="BINNI Logo" class="d-inline-block align-text-top">
             </a>
             <div class="ms-auto">
-                <img src="../images/default-avatar.png" alt="Avatar" class="rounded-circle">
+                <img src="../images/default-avatar.jpg" alt="Avatar" class="navbar-avatar">
             </div>
         </div>
     </nav>
@@ -110,15 +110,27 @@
         <!-- 主要内容区域 -->
         <main class="main-content">
             <div class="content-card">
-                <h1>Instagram 照片集</h1>
+                <h1>IG 照片集</h1>
                 <p>这里展示来自Instagram的精彩照片。</p>
             </div>
             <div class="content">
-                <div class="photo-grid">
-                    <!-- 这里将通过JavaScript动态加载照片 -->
+                <!-- 时间筛选器 -->
+                <div class="time-filter">
+                    <select id="timeFilter" class="form-select">
+                        <option value="">选择时间</option>
+                    </select>
+                </div>
+                <div class="tweet-container" id="tweetContainer">
+                    <!-- 推文将通过JavaScript动态加载 -->
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- 图片查看器 -->
+    <div class="image-viewer" id="imageViewer">
+        <span class="image-viewer-close" id="imageViewerClose">&times;</span>
+        <img src="" alt="查看大图" id="imageViewerImg">
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
@@ -157,6 +169,148 @@
             if (currentPath.includes('ig.html') || currentPath.includes('wvs.html') || currentPath.includes('x.html')) {
                 photoSubmenu.classList.add('show');
             }
+        });
+
+        // 图片查看器功能
+        const imageViewer = document.getElementById('imageViewer');
+        const imageViewerImg = document.getElementById('imageViewerImg');
+        const imageViewerClose = document.getElementById('imageViewerClose');
+
+        function openImageViewer(src) {
+            imageViewerImg.src = src;
+            imageViewer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageViewer() {
+            imageViewer.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        imageViewerClose.addEventListener('click', closeImageViewer);
+        imageViewer.addEventListener('click', function (e) {
+            if (e.target === imageViewer) {
+                closeImageViewer();
+            }
+        });
+
+        // 获取可用的时间选项
+        async function getAvailableTimes() {
+            try {
+                const response = await fetch('../photo/IG/times.json');
+                const times = await response.json();
+                const timeFilter = document.getElementById('timeFilter');
+
+                // 清空现有选项
+                timeFilter.innerHTML = '<option value="">选择时间</option>';
+
+                // 添加时间选项
+                times.forEach(time => {
+                    const option = document.createElement('option');
+                    option.value = time.path;
+                    option.textContent = time.display;
+                    timeFilter.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading times:', error);
+            }
+        }
+
+        // 加载推文数据
+        async function loadTweets(timePath) {
+            try {
+                const response = await fetch(`../photo/IG/${timePath}/tweets.json`);
+                const tweets = await response.json();
+                const tweetContainer = document.getElementById('tweetContainer');
+
+                // 清空现有推文
+                tweetContainer.innerHTML = '';
+
+                tweets.forEach(tweet => {
+                    const tweetElement = createTweetElement(tweet);
+                    tweetContainer.appendChild(tweetElement);
+                });
+            } catch (error) {
+                console.error('Error loading tweets:', error);
+            }
+        }
+
+        // 创建推文元素
+        function createTweetElement(tweet) {
+            const tweetDiv = document.createElement('div');
+            tweetDiv.className = 'tweet';
+
+            const date = new Date(tweet.timestamp);
+            const formattedDate = date.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            tweetDiv.innerHTML = `
+                <div class="tweet-header">
+                    <img src="${tweet.avatar || '../images/default-avatar.jpg'}" alt="Avatar" class="tweet-avatar">
+                    <div class="tweet-user-info">
+                        <h3 class="tweet-username">${tweet.username}</h3>
+                        <p class="tweet-handle">@${tweet.handle}</p>
+                    </div>
+                    <span class="tweet-time">${formattedDate}</span>
+                </div>
+                <div class="tweet-content">
+                    <p>${tweet.content}</p>
+                </div>
+                ${tweet.images ? `
+                    <div class="tweet-images ${getImageGridClass(tweet.images.length)}">
+                        ${tweet.images.map(image => `
+                            <img src="${image}" alt="Tweet image" class="tweet-image" onclick="openImageViewer('${image}')">
+                        `).join('')}
+                    </div>
+                ` : ''}
+                <div class="tweet-actions">
+                    <a href="#" class="tweet-action">
+                        <i class="far fa-comment"></i>
+                        <span>${tweet.replies || 0}</span>
+                    </a>
+                    <a href="#" class="tweet-action">
+                        <i class="fas fa-retweet"></i>
+                        <span>${tweet.retweets || 0}</span>
+                    </a>
+                    <a href="#" class="tweet-action">
+                        <i class="far fa-heart"></i>
+                        <span>${tweet.likes || 0}</span>
+                    </a>
+                    <a href="#" class="tweet-action">
+                        <i class="far fa-share-square"></i>
+                    </a>
+                </div>
+            `;
+
+            return tweetDiv;
+        }
+
+        // 根据图片数量确定网格类名
+        function getImageGridClass(count) {
+            switch (count) {
+                case 1: return 'single';
+                case 2: return 'double';
+                case 3: return 'triple';
+                case 4: return 'quad';
+                default: return 'single';
+            }
+        }
+
+        // 时间筛选器变化事件
+        document.getElementById('timeFilter').addEventListener('change', function (e) {
+            if (e.target.value) {
+                loadTweets(e.target.value);
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            getAvailableTimes();
         });
     </script>
 </body>
