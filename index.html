@@ -6,97 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BINNI - 个人网站</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/fontawesome.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- 顶部导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="images/logo.png" alt="BINNI Logo" height="40" class="d-inline-block align-text-top">
+                <img src="images/default-logo.png" alt="BINNI Logo" class="d-inline-block align-text-top">
             </a>
             <div class="ms-auto">
-                <img src="images/avatar.jpg" alt="Avatar" class="rounded-circle" height="40">
+                <img src="images/default-avatar.png" alt="Avatar" class="rounded-circle">
             </div>
         </div>
     </nav>
 
-    <!-- 主要内容区域 -->
-    <div class="container-fluid">
-        <div class="row">
-            <!-- 侧边栏 -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
-                                <i class="fas fa-images"></i>
-                                <span>照片集</span>
-                            </a>
-                            <div class="collapse" id="photoSubmenu">
-                                <ul class="nav flex-column">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="pages/ig.html">
-                                            <i class="fab fa-instagram"></i>
-                                            <span>IG</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="pages/wvs.html">
-                                            <i class="fas fa-camera"></i>
-                                            <span>WVS</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="pages/x.html">
-                                            <i class="fab fa-twitter"></i>
-                                            <span>X</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-video"></i>
-                                <span>直拍</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                <i class="fas fa-tv"></i>
-                                <span>综艺</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+    <!-- 主要内容容器 -->
+    <div class="main-container">
+        <!-- 侧边栏 -->
+        <nav id="sidebar" class="sidebar">
+            <div class="position-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
+                            <i class="fas fa-images"></i>
+                            <span>照片集</span>
+                        </a>
+                        <div class="collapse" id="photoSubmenu">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/ig.html">
+                                        <i class="fab fa-instagram"></i>
+                                        <span>IG</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/wvs.html">
+                                        <i class="fas fa-camera"></i>
+                                        <span>WVS</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="pages/x.html">
+                                        <i class="fab fa-twitter"></i>
+                                        <span>X</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-video"></i>
+                            <span>直拍</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-tv"></i>
+                            <span>综艺</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
 
-            <!-- 侧边栏切换按钮 -->
-            <button class="sidebar-toggle" id="sidebarToggle">
-                <i class="fas fa-chevron-left"></i>
-            </button>
+        <!-- 侧边栏切换按钮 -->
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-chevron-left"></i>
+        </button>
 
-            <!-- 主要内容 -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="content-card">
-                    <h1 class="h2 mb-4">欢迎来到BINNI的网站</h1>
-                    <p class="lead">这里是一个充满活力的个人空间，记录着精彩瞬间。</p>
-                </div>
-                <div class="content">
-                    <!-- 内容将在这里动态加载 -->
-                </div>
-            </main>
-        </div>
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <div class="content-card">
+                <h1>欢迎来到BINNI的网站</h1>
+                <p>这里是一个充满活力的个人空间，记录着精彩瞬间。</p>
+            </div>
+            <div class="content">
+                <!-- 内容将在这里动态加载 -->
+            </div>
+        </main>
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
     <script>
