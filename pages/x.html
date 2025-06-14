@@ -18,11 +18,11 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">
-                <img src="../images/default-logo.png" alt="BINNI Logo" class="d-inline-block align-text-top">
+                <img src="../images/default-avatar.jpg" alt="BINNI Logo" class="d-inline-block align-text-top">
             </a>
-            <div class="ms-auto">
+            <!-- <div class="ms-auto">
                 <img src="../images/default-avatar.png" alt="Avatar" class="rounded-circle">
-            </div>
+            </div> -->
         </div>
     </nav>
 
@@ -225,7 +225,7 @@
 
             tweetDiv.innerHTML = `
                 <div class="tweet-header">
-                    <img src="${tweet.avatar || '../images/default-avatar.png'}" alt="Avatar" class="tweet-avatar">
+                    <img src="${tweet.avatar || '../images/default-avatar.jpg'}" alt="Avatar" class="tweet-avatar">
                     <div class="tweet-user-info">
                         <h3 class="tweet-username">${tweet.username}</h3>
                         <p class="tweet-handle">@${tweet.handle}</p>
