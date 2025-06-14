@@ -121,6 +121,24 @@
         // 初始化和窗口大小改变时处理
         window.addEventListener('resize', handleResize);
         handleResize();
+
+        // 子菜单展开/收起逻辑
+        document.addEventListener('DOMContentLoaded', function () {
+            const photoSubmenu = document.getElementById('photoSubmenu');
+            const photoLink = document.querySelector('[data-bs-target="#photoSubmenu"]');
+
+            // 点击父菜单时切换子菜单的显示状态
+            photoLink.addEventListener('click', function (e) {
+                e.preventDefault();
+                photoSubmenu.classList.toggle('show');
+            });
+
+            // 如果当前在子页面，自动展开子菜单
+            const currentPath = window.location.pathname;
+            if (currentPath.includes('ig.html') || currentPath.includes('wvs.html') || currentPath.includes('x.html')) {
+                photoSubmenu.classList.add('show');
+            }
+        });
     </script>
 </body>
 
