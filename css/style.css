@@ -1,7 +1,18 @@
 /* 全局样式 */
+:root {
+    --sea-salt-blue: #E8F1F2;
+    --light-blue: #B8D8D8;
+    --medium-blue: #7A9E9E;
+    --dark-blue: #31493C;
+    --pudding-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    --pudding-background: rgba(255, 255, 255, 0.7);
+}
+
 body {
     font-family: 'Microsoft YaHei', sans-serif;
     padding-top: 60px;
+    background-color: var(--sea-salt-blue);
+    color: var(--dark-blue);
 }
 
 /* 侧边栏样式 */
@@ -12,45 +23,79 @@ body {
     left: 0;
     z-index: 100;
     padding: 48px 0 0;
-    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background: var(--pudding-background);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-right: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: var(--pudding-shadow);
 }
 
 .sidebar .nav-link {
     font-weight: 500;
-    color: #333;
-    padding: 0.5rem 1rem;
+    color: var(--dark-blue);
+    padding: 0.8rem 1.5rem;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0.3rem 1rem;
 }
 
 .sidebar .nav-link:hover {
-    color: #007bff;
+    color: var(--medium-blue);
+    background: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
 }
 
 .sidebar .nav-link.active {
-    color: #007bff;
+    color: var(--medium-blue);
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .sidebar .nav-link i {
-    margin-right: 0.5rem;
+    margin-right: 0.8rem;
+    color: var(--medium-blue);
 }
 
 /* 子菜单样式 */
 #photoSubmenu .nav-link {
-    padding-left: 2rem;
+    padding-left: 2.5rem;
     font-size: 0.9rem;
+    margin: 0.2rem 1rem;
 }
 
 /* 主要内容区域样式 */
 main {
     margin-top: 20px;
+    padding: 2rem;
+    background: var(--pudding-background);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px;
+    box-shadow: var(--pudding-shadow);
+    margin: 2rem;
 }
 
 /* 导航栏样式 */
 .navbar {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+    background: var(--pudding-background) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--pudding-shadow);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .navbar-brand img {
     margin-right: 10px;
+    border-radius: 8px;
+}
+
+.navbar .rounded-circle {
+    border: 2px solid var(--light-blue);
+    transition: all 0.3s ease;
+}
+
+.navbar .rounded-circle:hover {
+    transform: scale(1.05);
+    box-shadow: var(--pudding-shadow);
 }
 
 /* 响应式调整 */
@@ -59,5 +104,28 @@ main {
         position: static;
         height: auto;
         padding-top: 0;
+        margin: 1rem;
+        border-radius: 16px;
     }
+
+    main {
+        margin: 1rem;
+    }
+}
+
+/* 内容卡片样式 */
+.content-card {
+    background: var(--pudding-background);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: var(--pudding-shadow);
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
 }
