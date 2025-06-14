@@ -1,0 +1,16 @@
+[
+    {
+        "username": "BINNI",
+        "handle": "binni1204",
+        "avatar": "../images/default-avatar.jpg",
+        "timestamp": "2024-12-04T10:30:00",
+        "content": "今天天气真好，草地~",
+        "images": [
+            "../photo/X/24年/12月/4日/Gd9sD0ubYAANXSE.jpg",
+            "../photo/X/24年/12月/4日/Gd9sD0va0AIPzhj.jpg"
+        ],
+        "replies": 4,
+        "retweets": 12,
+        "likes": 1204
+    }
+]
