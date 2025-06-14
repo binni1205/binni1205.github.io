@@ -2,7 +2,7 @@
     {
         "username": "BINNI",
         "handle": "binni1205",
-        "avatar": "../images/default-avatar.png",
+        "avatar": "../images/default-avatar.jpg",
         "timestamp": "2024-12-05T10:30:00",
         "content": "今天天气真好，拍了一些照片分享给大家~",
         "images": [
@@ -11,6 +11,6 @@
         ],
         "replies": 5,
         "retweets": 12,
-        "likes": 48
+        "likes": 1205
     }
 ]
