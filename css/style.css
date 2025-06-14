@@ -247,33 +247,57 @@ body {
     }
 }
 
-/* 推文样式 */
+/* 推文容器样式 */
 .tweet-container {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.tweet {
-    background: var(--pudding-background);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 16px;
-    padding: 20px;
+/* 时间筛选器样式 */
+.time-filter {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
     margin-bottom: 20px;
-    box-shadow: var(--pudding-shadow);
-    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.time-filter select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e1e8ed;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #14171a;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.time-filter select:focus {
+    outline: none;
+    border-color: #1da1f2;
+}
+
+/* 推文样式 */
+.tweet {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
 }
 
 .tweet:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.2);
 }
 
+/* 推文头部样式 */
 .tweet-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .tweet-avatar {
@@ -281,7 +305,6 @@ body {
     height: 48px;
     border-radius: 50%;
     margin-right: 12px;
-    object-fit: cover;
 }
 
 .tweet-user-info {
@@ -289,84 +312,82 @@ body {
 }
 
 .tweet-username {
+    font-size: 16px;
     font-weight: bold;
-    color: var(--dark-blue);
     margin: 0;
-    font-size: 1.1rem;
+    color: #14171a;
 }
 
 .tweet-handle {
-    color: var(--medium-blue);
+    font-size: 14px;
+    color: #657786;
     margin: 0;
-    font-size: 0.9rem;
 }
 
 .tweet-time {
-    color: var(--medium-blue);
-    font-size: 0.9rem;
+    font-size: 14px;
+    color: #657786;
 }
 
+/* 推文内容样式 */
 .tweet-content {
     margin-bottom: 15px;
+    font-size: 15px;
     line-height: 1.5;
-    color: var(--dark-blue);
+    color: #14171a;
 }
 
+/* 推文图片网格样式 */
 .tweet-images {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
+    gap: 4px;
     margin-bottom: 15px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tweet-images.single {
+    grid-template-columns: 1fr;
+}
+
+.tweet-images.double {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.tweet-images.triple {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.tweet-images.quad {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .tweet-image {
     width: 100%;
-    height: 200px;
+    height: 300px;
     object-fit: cover;
-    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: opacity 0.2s ease;
 }
 
 .tweet-image:hover {
-    transform: scale(1.02);
-}
-
-.tweet-actions {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.tweet-action {
-    display: flex;
-    align-items: center;
-    color: var(--medium-blue);
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.tweet-action:hover {
-    color: var(--dark-blue);
-}
-
-.tweet-action i {
-    margin-right: 8px;
+    opacity: 0.9;
 }
 
 /* 图片查看器样式 */
 .image-viewer {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0, 0, 0, 0.9);
-    display: none;
+    z-index: 1000;
     justify-content: center;
     align-items: center;
-    z-index: 1100;
 }
 
 .image-viewer.active {
@@ -383,10 +404,38 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    color: white;
-    font-size: 2rem;
+    color: #fff;
+    font-size: 30px;
     cursor: pointer;
-    z-index: 1101;
+}
+
+/* 推文操作按钮样式 */
+.tweet-actions {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #e1e8ed;
+}
+
+.tweet-action {
+    color: #657786;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.2s ease;
+}
+
+.tweet-action:hover {
+    color: #1da1f2;
+}
+
+.tweet-action i {
+    font-size: 16px;
+}
+
+.tweet-action span {
+    font-size: 14px;
 }
 
 /* 响应式调整 */
@@ -395,15 +444,11 @@ body {
         padding: 10px;
     }
 
-    .tweet {
-        padding: 15px;
-    }
-
-    .tweet-images {
-        grid-template-columns: 1fr;
-    }
-
     .tweet-image {
-        height: 250px;
+        height: 200px;
+    }
+
+    .image-viewer img {
+        max-width: 95%;
     }
 }

@@ -88,6 +88,12 @@
                 <p>这里展示来自X的精彩照片。</p>
             </div>
             <div class="content">
+                <!-- 时间筛选器 -->
+                <div class="time-filter">
+                    <select id="timeFilter" class="form-select">
+                        <option value="">选择时间</option>
+                    </select>
+                </div>
                 <div class="tweet-container" id="tweetContainer">
                     <!-- 推文将通过JavaScript动态加载 -->
                 </div>
@@ -162,12 +168,37 @@
             }
         });
 
-        // 加载推文数据
-        async function loadTweets() {
+        // 获取可用的时间选项
+        async function getAvailableTimes() {
             try {
-                const response = await fetch('../photos/X/2024/12/05/tweets.json');
+                const response = await fetch('../photo/X/times.json');
+                const times = await response.json();
+                const timeFilter = document.getElementById('timeFilter');
+
+                // 清空现有选项
+                timeFilter.innerHTML = '<option value="">选择时间</option>';
+
+                // 添加时间选项
+                times.forEach(time => {
+                    const option = document.createElement('option');
+                    option.value = time.path;
+                    option.textContent = time.display;
+                    timeFilter.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading times:', error);
+            }
+        }
+
+        // 加载推文数据
+        async function loadTweets(timePath) {
+            try {
+                const response = await fetch(`../photo/X/${timePath}/tweets.json`);
                 const tweets = await response.json();
                 const tweetContainer = document.getElementById('tweetContainer');
+
+                // 清空现有推文
+                tweetContainer.innerHTML = '';
 
                 tweets.forEach(tweet => {
                     const tweetElement = createTweetElement(tweet);
@@ -205,7 +236,7 @@
                     <p>${tweet.content}</p>
                 </div>
                 ${tweet.images ? `
-                    <div class="tweet-images">
+                    <div class="tweet-images ${getImageGridClass(tweet.images.length)}">
                         ${tweet.images.map(image => `
                             <img src="${image}" alt="Tweet image" class="tweet-image" onclick="openImageViewer('${image}')">
                         `).join('')}
@@ -233,8 +264,28 @@
             return tweetDiv;
         }
 
-        // 页面加载完成后加载推文
-        document.addEventListener('DOMContentLoaded', loadTweets);
+        // 根据图片数量确定网格类名
+        function getImageGridClass(count) {
+            switch (count) {
+                case 1: return 'single';
+                case 2: return 'double';
+                case 3: return 'triple';
+                case 4: return 'quad';
+                default: return 'single';
+            }
+        }
+
+        // 时间筛选器变化事件
+        document.getElementById('timeFilter').addEventListener('change', function (e) {
+            if (e.target.value) {
+                loadTweets(e.target.value);
+            }
+        });
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function () {
+            getAvailableTimes();
+        });
     </script>
 </body>
 
