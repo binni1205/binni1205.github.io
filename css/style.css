@@ -6,6 +6,8 @@
     --dark-blue: #31493C;
     --pudding-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
     --pudding-background: rgba(255, 255, 255, 0.7);
+    --sidebar-width: 250px;
+    --sidebar-collapsed-width: 60px;
 }
 
 body {
@@ -13,6 +15,7 @@ body {
     padding-top: 60px;
     background-color: var(--sea-salt-blue);
     color: var(--dark-blue);
+    transition: all 0.3s ease;
 }
 
 /* 侧边栏样式 */
@@ -28,6 +31,47 @@ body {
     -webkit-backdrop-filter: blur(8px);
     border-right: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: var(--pudding-shadow);
+    width: var(--sidebar-width);
+    transition: all 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-toggle {
+    position: fixed;
+    left: var(--sidebar-width);
+    top: 70px;
+    z-index: 101;
+    background: var(--pudding-background);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--pudding-shadow);
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.1);
+}
+
+.sidebar.collapsed+.sidebar-toggle {
+    left: var(--sidebar-collapsed-width);
+}
+
+.sidebar-toggle i {
+    color: var(--medium-blue);
+    transition: transform 0.3s ease;
+}
+
+.sidebar.collapsed .sidebar-toggle i {
+    transform: rotate(180deg);
 }
 
 .sidebar .nav-link {
@@ -37,6 +81,22 @@ body {
     transition: all 0.3s ease;
     border-radius: 8px;
     margin: 0.3rem 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.sidebar.collapsed .nav-link {
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.sidebar.collapsed .nav-link span {
+    display: none;
+}
+
+.sidebar.collapsed .nav-link i {
+    margin: 0;
+    font-size: 1.2rem;
 }
 
 .sidebar .nav-link:hover {
@@ -53,9 +113,18 @@ body {
 .sidebar .nav-link i {
     margin-right: 0.8rem;
     color: var(--medium-blue);
+    transition: margin 0.3s ease;
 }
 
 /* 子菜单样式 */
+#photoSubmenu {
+    transition: all 0.3s ease;
+}
+
+.sidebar.collapsed #photoSubmenu {
+    display: none;
+}
+
 #photoSubmenu .nav-link {
     padding-left: 2.5rem;
     font-size: 0.9rem;
@@ -64,7 +133,7 @@ body {
 
 /* 主要内容区域样式 */
 main {
-    margin-top: 20px;
+    margin-left: var(--sidebar-width);
     padding: 2rem;
     background: var(--pudding-background);
     backdrop-filter: blur(8px);
@@ -72,6 +141,11 @@ main {
     border-radius: 16px;
     box-shadow: var(--pudding-shadow);
     margin: 2rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar.collapsed~main {
+    margin-left: var(--sidebar-collapsed-width);
 }
 
 /* 导航栏样式 */
@@ -81,6 +155,11 @@ main {
     -webkit-backdrop-filter: blur(8px);
     box-shadow: var(--pudding-shadow);
     border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 102;
 }
 
 .navbar-brand img {
@@ -101,14 +180,20 @@ main {
 /* 响应式调整 */
 @media (max-width: 767.98px) {
     .sidebar {
-        position: static;
-        height: auto;
-        padding-top: 0;
-        margin: 1rem;
-        border-radius: 16px;
+        transform: translateX(-100%);
+        width: var(--sidebar-width);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .sidebar-toggle {
+        left: 0;
     }
 
     main {
+        margin-left: 0 !important;
         margin: 1rem;
     }
 }

@@ -30,40 +30,57 @@
     <div class="container-fluid">
         <div class="row">
             <!-- 侧边栏 -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar">
                 <div class="position-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
-                                <i class="fas fa-images"></i> 照片集
+                                <i class="fas fa-images"></i>
+                                <span>照片集</span>
                             </a>
                             <div class="collapse" id="photoSubmenu">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/ig.html">IG</a>
+                                        <a class="nav-link" href="pages/ig.html">
+                                            <i class="fab fa-instagram"></i>
+                                            <span>IG</span>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/wvs.html">WVS</a>
+                                        <a class="nav-link" href="pages/wvs.html">
+                                            <i class="fas fa-camera"></i>
+                                            <span>WVS</span>
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="pages/x.html">X</a>
+                                        <a class="nav-link" href="pages/x.html">
+                                            <i class="fab fa-twitter"></i>
+                                            <span>X</span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-video"></i> 直拍
+                                <i class="fas fa-video"></i>
+                                <span>直拍</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">
-                                <i class="fas fa-tv"></i> 综艺
+                                <i class="fas fa-tv"></i>
+                                <span>综艺</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
+
+            <!-- 侧边栏切换按钮 -->
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-chevron-left"></i>
+            </button>
 
             <!-- 主要内容 -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
@@ -82,6 +99,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
+    <script>
+        // 侧边栏切换功能
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('collapsed');
+            this.querySelector('i').classList.toggle('fa-chevron-left');
+            this.querySelector('i').classList.toggle('fa-chevron-right');
+        });
+
+        // 移动端响应式处理
+        function handleResize() {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebarToggle');
+
+            if (window.innerWidth < 768) {
+                sidebar.classList.add('collapsed');
+                toggle.style.display = 'flex';
+            } else {
+                toggle.style.display = 'flex';
+            }
+        }
+
+        // 初始化和窗口大小改变时处理
+        window.addEventListener('resize', handleResize);
+        handleResize();
+    </script>
 </body>
 
 </html>
