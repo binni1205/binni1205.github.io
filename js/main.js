@@ -141,18 +141,18 @@ function createVideoCard(video) {
         const modal = new bootstrap.Modal(document.getElementById('videoModal'));
         const videoPlayer = document.getElementById('videoPlayer');
         const modalTitle = document.querySelector('.modal-title');
-        const closeButton = document.querySelector('.btn-close');
 
         videoPlayer.src = video.path;
         modalTitle.textContent = video.title;
         modal.show();
 
-        // 添加关闭按钮事件
-        closeButton.onclick = () => {
-            modal.hide();
+        // 添加关闭按钮事件处理
+        const closeButton = document.querySelector('.btn-close');
+        closeButton.addEventListener('click', () => {
             videoPlayer.pause();
             videoPlayer.src = '';
-        };
+            modal.hide();
+        });
     });
 
     return card;
