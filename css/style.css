@@ -440,3 +440,153 @@ body {
         padding: 10px;
     }
 }
+
+/* 视频网格布局 */
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* 视频卡片样式 */
+.video-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.video-card:hover {
+    transform: translateY(-5px);
+}
+
+/* 视频缩略图容器 */
+.video-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    /* 16:9 宽高比 */
+    overflow: hidden;
+}
+
+.video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 视频时长标签 */
+.video-duration {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* 播放按钮 */
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.play-button i {
+    color: #fff;
+    font-size: 24px;
+}
+
+.video-card:hover .play-button {
+    opacity: 1;
+}
+
+/* 视频信息 */
+.video-info {
+    padding: 15px;
+}
+
+.video-info h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.video-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+/* 视频播放器模态框 */
+.modal-content {
+    background: #000;
+    border: none;
+    border-radius: 12px;
+}
+
+.modal-header {
+    border-bottom: none;
+    padding: 15px 20px;
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+    /* 16:9 宽高比 */
+}
+
+#videoPlayer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .video-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .video-info h3 {
+        font-size: 14px;
+    }
+
+    .video-info p {
+        font-size: 12px;
+    }
+}

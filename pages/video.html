@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>直拍 - BINNI</title>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <link rel="stylesheet" href="../lib/fontawesome.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../images/logo.png" alt="BINNI" class="logo">
+            </a>
+            <div class="d-flex align-items-center">
+                <img src="../images/avatar.png" alt="Avatar" class="avatar">
+            </div>
+        </div>
+    </nav>
+
+    <!-- 侧边栏 -->
+    <div id="sidebar" class="sidebar">
+        <button id="sidebarToggle" class="sidebar-toggle">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="../index.html">
+                    <i class="fas fa-home"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
+                    <i class="fas fa-images"></i>
+                    <span>照片集</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </a>
+                <div class="collapse" id="photoSubmenu">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="ig.html">
+                                <i class="fab fa-instagram"></i>
+                                <span>IG</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="wvs.html">
+                                <i class="fas fa-camera"></i>
+                                <span>WVS</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="x.html">
+                                <i class="fab fa-twitter"></i>
+                                <span>X</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="video.html">
+                    <i class="fas fa-video"></i>
+                    <span>直拍</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">
+                    <i class="fas fa-user"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="video-grid">
+                <!-- 视频卡片将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 视频播放器模态框 -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="video-container">
+                        <video id="videoPlayer" controls>
+                            <source src="" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../lib/bootstrap.bundle.min.js"></script>
+    <script>
+        // 侧边栏切换功能
+        document.getElementById('sidebarToggle').addEventListener('click', function () {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main-content');
+
+            if (window.innerWidth < 768) {
+                // 移动端：切换侧边栏显示/隐藏
+                sidebar.classList.toggle('active');
+                if (sidebar.classList.contains('active')) {
+                    mainContent.style.marginLeft = '250px';
+                    mainContent.style.width = 'calc(100% - 250px)';
+                } else {
+                    mainContent.style.marginLeft = '0';
+                    mainContent.style.width = '100%';
+                }
+            } else {
+                // PC端：切换侧边栏展开/收起
+                sidebar.classList.toggle('collapsed');
+                this.querySelector('i').classList.toggle('fa-chevron-left');
+                this.querySelector('i').classList.toggle('fa-chevron-right');
+            }
+        });
+
+        // 移动端响应式处理
+        function handleResize() {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.getElementById('sidebarToggle');
+            const mainContent = document.querySelector('.main-content');
+
+            if (window.innerWidth < 768) {
+                sidebar.classList.remove('collapsed');
+                sidebar.classList.remove('active');
+                toggle.style.display = 'flex';
+                mainContent.style.marginLeft = '0';
+                mainContent.style.width = '100%';
+            } else {
+                toggle.style.display = 'flex';
+                if (sidebar.classList.contains('collapsed')) {
+                    mainContent.style.marginLeft = '60px';
+                    mainContent.style.width = 'calc(100% - 60px)';
+                } else {
+                    mainContent.style.marginLeft = '250px';
+                    mainContent.style.width = 'calc(100% - 250px)';
+                }
+            }
+        }
+
+        // 初始化和窗口大小改变时处理
+        window.addEventListener('resize', handleResize);
+        handleResize();
+
+        // 加载视频数据
+        async function loadVideos() {
+            try {
+                const response = await fetch('../video/videos.json');
+                const data = await response.json();
+                const videoGrid = document.querySelector('.video-grid');
+
+                data.forEach(video => {
+                    const videoCard = createVideoCard(video);
+                    videoGrid.appendChild(videoCard);
+                });
+            } catch (error) {
+                console.error('加载视频数据失败:', error);
+            }
+        }
+
+        // 创建视频卡片
+        function createVideoCard(video) {
+            const card = document.createElement('div');
+            card.className = 'video-card';
+            card.innerHTML = `
+                <div class="video-thumbnail" data-video="${video.path}">
+                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <div class="video-duration">${video.duration}</div>
+                    <div class="play-button">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h3>${video.title}</h3>
+                    <p>${video.date}</p>
+                </div>
+            `;
+
+            // 添加点击事件
+            card.querySelector('.video-thumbnail').addEventListener('click', () => {
+                const modal = new bootstrap.Modal(document.getElementById('videoModal'));
+                const videoPlayer = document.getElementById('videoPlayer');
+                const modalTitle = document.querySelector('.modal-title');
+
+                videoPlayer.src = video.path;
+                modalTitle.textContent = video.title;
+                modal.show();
+            });
+
+            return card;
+        }
+
+        // 页面加载完成后加载视频
+        document.addEventListener('DOMContentLoaded', loadVideos);
+    </script>
+</body>
+
+</html>
