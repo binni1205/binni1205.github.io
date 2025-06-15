@@ -158,9 +158,22 @@ function createVideoCard(video) {
         const videoPlayer = document.getElementById('videoPlayer');
         const modalTitle = document.querySelector('.modal-title');
 
+        // 设置视频源
         videoPlayer.src = video.path;
-        modalTitle.textContent = video.title;
+
+        // 设置标题（如果存在）
+        if (modalTitle) {
+            modalTitle.textContent = video.title;
+        }
+
+        // 显示模态框
         modal.show();
+
+        // 监听模态框关闭事件
+        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
+            videoPlayer.pause();
+            videoPlayer.src = '';
+        }, { once: true });
     });
 
     return card;
