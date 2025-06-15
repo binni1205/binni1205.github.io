@@ -128,16 +128,17 @@
         </div>
     </div>
 
-    <!-- 视频播放器模态框 -->
+    <!-- 视频模态框 -->
     <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 <div class="modal-body p-0">
-                    <video id="videoPlayer" class="w-100" controls>
-                        <source src="" type="video/mp4">
-                        您的浏览器不支持视频播放。
-                    </video>
+                    <div class="video-container">
+                        <video id="videoPlayer" class="w-100" controls preload="metadata">
+                            <!-- 视频源将通过JavaScript动态添加 -->
+                        </video>
+                    </div>
                 </div>
             </div>
         </div>
