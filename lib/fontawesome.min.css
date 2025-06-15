@@ -87,27 +87,27 @@
 }
 
 .fa-chevron-down:before {
-    content: "\f078"
+    content: "▼"
 }
 
 .fa-chevron-left:before {
-    content: "\f053"
+    content: "◀"
 }
 
 .fa-chevron-right:before {
-    content: "\f054"
+    content: "▶"
 }
 
 .fa-home:before {
-    content: "\f015"
+    content: "🏠"
 }
 
 .fa-images:before {
-    content: "\f302"
+    content: "🖼️"
 }
 
 .fa-play:before {
-    content: "\f04b"
+    content: "▶️"
 }
 
 .fa-user:before {
@@ -115,17 +115,63 @@
 }
 
 .fa-video:before {
-    content: "\f03d"
+    content: "🎥"
 }
 
 .fa-camera:before {
-    content: "\f030"
+    content: "📷"
 }
 
 .fa-instagram:before {
-    content: "\f16d"
+    content: "📸"
 }
 
 .fa-twitter:before {
     content: "\f099"
+}
+
+/* 使用Unicode字符替代Font Awesome */
+.fa,
+.fas,
+.fab {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+}
+
+.fa-home:before {
+    content: "🏠";
+}
+
+.fa-images:before {
+    content: "🖼️";
+}
+
+.fa-chevron-down:before {
+    content: "▼";
+}
+
+.fa-chevron-left:before {
+    content: "◀";
+}
+
+.fa-chevron-right:before {
+    content: "▶";
+}
+
+.fa-play:before {
+    content: "▶️";
+}
+
+.fa-instagram:before {
+    content: "📸";
+}
+
+.fa-camera:before {
+    content: "📷";
+}
+
+.fa-video:before {
+    content: "🎥";
 }
