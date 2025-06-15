@@ -83,12 +83,14 @@ body {
     display: flex;
     align-items: center;
     transition: all 0.3s ease;
+    text-decoration: none;
 }
 
 .sidebar .nav-link i {
     width: 24px;
     margin-right: 12px;
     font-size: 18px;
+    flex-shrink: 0;
 }
 
 .sidebar .nav-link span {
@@ -100,10 +102,12 @@ body {
 .sidebar.collapsed .nav-link span {
     opacity: 0;
     width: 0;
+    display: none;
 }
 
 .sidebar .nav-link:hover {
     background: #f5f8fa;
+    text-decoration: none;
 }
 
 .sidebar .nav-link.active {
@@ -153,10 +157,12 @@ body {
     margin-left: 250px;
     padding: 20px;
     transition: margin-left 0.3s ease;
+    width: calc(100% - 250px);
 }
 
 .sidebar.collapsed+.main-content {
     margin-left: 60px;
+    width: calc(100% - 60px);
 }
 
 /* 内容卡片样式 */
@@ -350,6 +356,7 @@ body {
 
 .tweet-action:hover {
     color: #1da1f2;
+    text-decoration: none;
 }
 
 .tweet-action i {
@@ -401,6 +408,7 @@ body {
     .main-content {
         margin-left: 0;
         padding: 10px;
+        width: 100%;
     }
 
     .tweet-container {
