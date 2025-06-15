@@ -49,13 +49,11 @@
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url("../webfonts/fa-brands-400.woff2") format("woff2"),
-        url("../webfonts/fa-brands-400.ttf") format("truetype");
+    src: url(../webfonts/fa-brands-400.woff2) format("woff2"), url(../webfonts/fa-brands-400.ttf) format("truetype")
 }
 
 .fab {
-    font-family: "Font Awesome 6 Brands";
-    font-weight: 400;
+    font-weight: 400
 }
 
 @font-face {
@@ -63,8 +61,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: block;
-    src: url("../webfonts/fa-regular-400.woff2") format("woff2"),
-        url("../webfonts/fa-regular-400.ttf") format("truetype");
+    src: url(../webfonts/fa-regular-400.woff2) format("woff2"), url(../webfonts/fa-regular-400.ttf) format("truetype")
 }
 
 .fa-regular,
@@ -77,8 +74,7 @@
     font-style: normal;
     font-weight: 900;
     font-display: block;
-    src: url("../webfonts/fa-solid-900.woff2") format("woff2"),
-        url("../webfonts/fa-solid-900.ttf") format("truetype");
+    src: url(../webfonts/fa-solid-900.woff2) format("woff2"), url(../webfonts/fa-solid-900.ttf) format("truetype")
 }
 
 .fa-solid,
@@ -87,27 +83,27 @@
 }
 
 .fa-chevron-down:before {
-    content: "▼"
+    content: "\f078"
 }
 
 .fa-chevron-left:before {
-    content: "◀"
+    content: "\f053"
 }
 
 .fa-chevron-right:before {
-    content: "▶"
+    content: "\f054"
 }
 
 .fa-home:before {
-    content: "🏠"
+    content: "\f015"
 }
 
 .fa-images:before {
-    content: "🖼️"
+    content: "\f302"
 }
 
 .fa-play:before {
-    content: "▶️"
+    content: "\f04b"
 }
 
 .fa-user:before {
@@ -115,63 +111,17 @@
 }
 
 .fa-video:before {
-    content: "🎥"
+    content: "\f03d"
 }
 
 .fa-camera:before {
-    content: "📷"
+    content: "\f030"
 }
 
 .fa-instagram:before {
-    content: "📸"
+    content: "\f16d"
 }
 
 .fa-twitter:before {
     content: "\f099"
-}
-
-/* 使用Unicode字符替代Font Awesome */
-.fa,
-.fas,
-.fab {
-    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-}
-
-.fa-home:before {
-    content: "🏠";
-}
-
-.fa-images:before {
-    content: "🖼️";
-}
-
-.fa-chevron-down:before {
-    content: "▼";
-}
-
-.fa-chevron-left:before {
-    content: "◀";
-}
-
-.fa-chevron-right:before {
-    content: "▶";
-}
-
-.fa-play:before {
-    content: "▶️";
-}
-
-.fa-instagram:before {
-    content: "📸";
-}
-
-.fa-camera:before {
-    content: "📷";
-}
-
-.fa-video:before {
-    content: "🎥";
 }

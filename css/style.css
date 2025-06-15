@@ -369,11 +369,11 @@ body {
 
 /* 移动端响应式调整 */
 @media (max-width: 768px) {
-    .navbar {
+.navbar {
         padding: 10px;
-    }
+}
 
-    .navbar-brand img {
+.navbar-brand img {
         height: 32px;
     }
 

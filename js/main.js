@@ -100,25 +100,11 @@ handleResize();
 async function loadVideos() {
     try {
         const response = await fetch('../video/videos.json');
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
         const data = await response.json();
         const videoGrid = document.querySelector('.video-grid');
 
-        if (!videoGrid) {
-            console.error('找不到视频网格容器');
-            return;
-        }
-
         // 清空现有内容
         videoGrid.innerHTML = '';
-
-        // 检查是否有视频数据
-        if (!data.videos || data.videos.length === 0) {
-            videoGrid.innerHTML = '<div class="alert alert-info">暂无视频</div>';
-            return;
-        }
 
         // 遍历视频数组
         data.videos.forEach(video => {
@@ -128,9 +114,7 @@ async function loadVideos() {
     } catch (error) {
         console.error('加载视频数据失败:', error);
         const videoGrid = document.querySelector('.video-grid');
-        if (videoGrid) {
-            videoGrid.innerHTML = '<div class="alert alert-warning">加载视频失败，请稍后重试</div>';
-        }
+        videoGrid.innerHTML = '<div class="alert alert-warning">加载视频失败，请稍后重试</div>';
     }
 }
 
@@ -158,22 +142,9 @@ function createVideoCard(video) {
         const videoPlayer = document.getElementById('videoPlayer');
         const modalTitle = document.querySelector('.modal-title');
 
-        // 设置视频源
         videoPlayer.src = video.path;
-
-        // 设置标题（如果存在）
-        if (modalTitle) {
-            modalTitle.textContent = video.title;
-        }
-
-        // 显示模态框
+        modalTitle.textContent = video.title;
         modal.show();
-
-        // 监听模态框关闭事件
-        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
-            videoPlayer.pause();
-            videoPlayer.src = '';
-        }, { once: true });
     });
 
     return card;
