@@ -153,15 +153,6 @@ function createVideoCard(video) {
             videoPlayer.pause();
             videoPlayer.src = '';
         };
-
-        // 点击模态框背景关闭
-        document.getElementById('videoModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('videoModal')) {
-                modal.hide();
-                videoPlayer.pause();
-                videoPlayer.src = '';
-            }
-        });
     });
 
     return card;
