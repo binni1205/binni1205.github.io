@@ -167,12 +167,18 @@
                 const data = await response.json();
                 const videoGrid = document.querySelector('.video-grid');
 
-                data.forEach(video => {
+                // 清空现有内容
+                videoGrid.innerHTML = '';
+
+                // 遍历视频数组
+                data.videos.forEach(video => {
                     const videoCard = createVideoCard(video);
                     videoGrid.appendChild(videoCard);
                 });
             } catch (error) {
                 console.error('加载视频数据失败:', error);
+                const videoGrid = document.querySelector('.video-grid');
+                videoGrid.innerHTML = '<div class="alert alert-warning">加载视频失败，请稍后重试</div>';
             }
         }
 
@@ -182,7 +188,7 @@
             card.className = 'video-card';
             card.innerHTML = `
                 <div class="video-thumbnail" data-video="${video.path}">
-                    <img src="${video.thumbnail}" alt="${video.title}">
+                    <img src="${video.thumbnail}" alt="${video.title}" onerror="this.src='../images/default-video.jpg'">
                     <div class="video-duration">${video.duration}</div>
                     <div class="play-button">
                         <i class="fas fa-play"></i>
@@ -209,7 +215,10 @@
         }
 
         // 页面加载完成后加载视频
-        document.addEventListener('DOMContentLoaded', loadVideos);
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVideos();
+            handleResize();
+        });
     </script>
 </body>
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="169" viewBox="0 0 300 169" xmlns="http://www.w3.org/2000/svg">
+    <!-- 背景 -->
+    <rect width="300" height="169" fill="#f0f0f0"/>
+    
+    <!-- 播放按钮 -->
+    <circle cx="150" cy="84.5" r="40" fill="#666" opacity="0.8"/>
+    <path d="M140 74.5l30 20-30 20z" fill="#fff"/>
+    
+    <!-- 视频图标 -->
+    <g transform="translate(20, 20)" fill="#666" opacity="0.5">
+        <path d="M20 0H0v40h20V0z"/>
+        <path d="M40 0H20v40h20V0z"/>
+        <path d="M60 0H40v40h20V0z"/>
+    </g>
+</svg> 
