@@ -9,6 +9,43 @@
     <link href="../lib/bootstrap.min.css" rel="stylesheet">
     <link href="../lib/fontawesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 修复导航栏遮挡问题 */
+        .main-content {
+            padding-top: 80px;
+            /* 增加顶部内边距，避免被导航栏遮挡 */
+        }
+
+        /* 修复模态框样式 */
+        .modal {
+            z-index: 1060;
+            /* 确保模态框在最上层 */
+        }
+
+        .modal-backdrop {
+            z-index: 1050;
+        }
+
+        .modal-dialog {
+            margin-top: 100px;
+            /* 调整模态框位置，避免被导航栏遮挡 */
+        }
+
+        .btn-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 1070;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            padding: 8px;
+            line-height: 1;
+        }
+
+        .btn-close:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+    </style>
 </head>
 
 <body>
@@ -90,19 +127,15 @@
     </div>
 
     <!-- 视频播放器模态框 -->
-    <div class="modal fade" id="videoModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="video-container">
-                        <video id="videoPlayer" controls>
-                            <source src="" type="video/mp4">
-                        </video>
-                    </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body p-0">
+                    <video id="videoPlayer" class="w-100" controls>
+                        <source src="" type="video/mp4">
+                        您的浏览器不支持视频播放。
+                    </video>
                 </div>
             </div>
         </div>
