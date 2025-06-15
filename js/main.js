@@ -156,29 +156,11 @@ function createVideoCard(video) {
     card.querySelector('.video-thumbnail').addEventListener('click', () => {
         const modal = new bootstrap.Modal(document.getElementById('videoModal'));
         const videoPlayer = document.getElementById('videoPlayer');
+        const modalTitle = document.querySelector('.modal-title');
 
-        // 设置视频源
-        videoPlayer.innerHTML = `
-            <source src="${video.path}" type="video/mp4">
-            您的浏览器不支持视频播放。
-        `;
-
-        // 显示模态框
+        videoPlayer.src = video.path;
+        modalTitle.textContent = video.title;
         modal.show();
-
-        // 监听模态框关闭事件
-        document.getElementById('videoModal').addEventListener('hidden.bs.modal', function () {
-            videoPlayer.pause();
-            videoPlayer.removeAttribute('src');
-            videoPlayer.load();
-        }, { once: true });
-
-        // 监听视频加载错误
-        videoPlayer.addEventListener('error', function (e) {
-            console.error('视频加载失败:', e);
-            alert('视频加载失败，请稍后重试');
-            modal.hide();
-        });
     });
 
     return card;
