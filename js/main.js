@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('sidebarToggle').addEventListener('click', function () {
     const sidebar = document.getElementById('sidebar');
     const mainContent = document.querySelector('.main-content');
+    const icon = this.querySelector('i');
 
     if (window.innerWidth < 768) {
         // 移动端：切换侧边栏显示/隐藏
@@ -63,8 +64,17 @@ document.getElementById('sidebarToggle').addEventListener('click', function () {
     } else {
         // PC端：切换侧边栏展开/收起
         sidebar.classList.toggle('collapsed');
-        this.querySelector('i').classList.toggle('fa-chevron-left');
-        this.querySelector('i').classList.toggle('fa-chevron-right');
+        if (sidebar.classList.contains('collapsed')) {
+            mainContent.style.marginLeft = '60px';
+            mainContent.style.width = 'calc(100% - 60px)';
+            icon.classList.remove('fa-chevron-left');
+            icon.classList.add('fa-chevron-right');
+        } else {
+            mainContent.style.marginLeft = '250px';
+            mainContent.style.width = 'calc(100% - 250px)';
+            icon.classList.remove('fa-chevron-right');
+            icon.classList.add('fa-chevron-left');
+        }
     }
 });
 
@@ -73,6 +83,7 @@ function handleResize() {
     const sidebar = document.getElementById('sidebar');
     const toggle = document.getElementById('sidebarToggle');
     const mainContent = document.querySelector('.main-content');
+    const icon = toggle.querySelector('i');
 
     if (window.innerWidth < 768) {
         sidebar.classList.remove('collapsed');
@@ -80,14 +91,20 @@ function handleResize() {
         toggle.style.display = 'flex';
         mainContent.style.marginLeft = '0';
         mainContent.style.width = '100%';
+        icon.classList.remove('fa-chevron-right');
+        icon.classList.add('fa-chevron-left');
     } else {
         toggle.style.display = 'flex';
         if (sidebar.classList.contains('collapsed')) {
             mainContent.style.marginLeft = '60px';
             mainContent.style.width = 'calc(100% - 60px)';
+            icon.classList.remove('fa-chevron-left');
+            icon.classList.add('fa-chevron-right');
         } else {
             mainContent.style.marginLeft = '250px';
             mainContent.style.width = 'calc(100% - 250px)';
+            icon.classList.remove('fa-chevron-right');
+            icon.classList.add('fa-chevron-left');
         }
     }
 }

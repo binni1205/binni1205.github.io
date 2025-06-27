@@ -11,134 +11,427 @@
     <link href="lib/fontawesome.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+        /* 首页专属样式补充 */
+        .navbar {
+            background: var(--primary-color);
+            color: #fff;
+            height: var(--navbar-height);
+            min-height: 60px;
+            box-shadow: 0 2px 8px rgba(127, 179, 213, 0.15);
+        }
+
+        .navbar .navbar-brand,
+        .navbar .navbar-brand span {
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .navbar .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .navbar-right {
+            margin-left: auto;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* 风铃侧边栏 */
+        .sidebar {
+            background: transparent;
+            box-shadow: none;
+            width: var(--sidebar-width);
+            min-width: var(--sidebar-width);
+            padding: 0;
+            z-index: 1001;
+        }
+
+        .windchime {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .windchime-string {
+            width: 4px;
+            background: #7FB3D5;
+            margin-bottom: 0;
+            border-radius: 2px;
+            transition: height 0.3s;
+        }
+
+        .windchime-collapsed .windchime-string {
+            height: 40px;
+        }
+
+        .windchime-expanded .windchime-string {
+            height: 220px;
+        }
+
+        .windchime-logo {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .windchime-collapsed .windchime-logo {
+            transform: rotate(0deg);
+        }
+
+        .windchime-expanded .windchime-logo {
+            transform: rotate(20deg);
+        }
+
+        .windchime-plates {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .windchime-plate {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(127, 179, 213, 0.12);
+            margin: 8px 0;
+            padding: 8px 18px 8px 8px;
+            min-width: 120px;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .windchime-plate .plate-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+        }
+
+        .windchime-plate.active {
+            color: #3498db;
+            font-weight: bold;
+            background: #EAF6FB;
+        }
+
+        .windchime-plate .arrow {
+            margin-left: 8px;
+            font-size: 0.9em;
+        }
+
+        .windchime-subplates {
+            margin-left: 32px;
+            margin-top: 2px;
+        }
+
+        .windchime-subplate {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin: 4px 0;
+            padding: 6px 12px 6px 6px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .windchime-subplate .plate-logo {
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+        }
+
+        .windchime-subplate.active {
+            color: #3498db;
+            font-weight: bold;
+            background: #EAF6FB;
+        }
+
+        /* 侧边栏收缩按钮 */
+        .sidebar-toggle {
+            left: var(--sidebar-width);
+            top: 80px;
+            z-index: 1100;
+        }
+
+        .sidebar.collapsed .sidebar-toggle {
+            left: var(--sidebar-collapsed-width);
+        }
+
+        /* 主内容区 */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            margin-top: var(--navbar-height);
+            padding: 40px 5vw 40px 5vw;
+            background: var(--background-color);
+            min-height: calc(100vh - var(--navbar-height));
+            transition: all 0.3s;
+        }
+
+        .sidebar.collapsed+.main-content {
+            margin-left: var(--sidebar-collapsed-width);
+        }
+
+        /* 首页内容 */
+        .home-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .home-header .logo10 {
+            width: 56px;
+            height: 56px;
+            margin-right: 16px;
+        }
+
+        .home-header .title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2C3E50;
+        }
+
+        .home-subheader {
+            display: flex;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .home-subheader .logo7 {
+            width: 32px;
+            height: 32px;
+            margin-left: 10px;
+        }
+
+        .intro-card {
+            display: flex;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(127, 179, 213, 0.10);
+            padding: 32px 32px 32px 0;
+            max-width: 700px;
+            margin-top: 18px;
+            margin-bottom: 32px;
+            align-items: flex-start;
+        }
+
+        .intro-card .logo6 {
+            width: 48px;
+            height: 48px;
+            margin-right: 18px;
+            margin-top: 8px;
+        }
+
+        .intro-content {
+            flex: 1;
+            padding-right: 24px;
+        }
+
+        .intro-photo {
+            width: 120px;
+            height: 160px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(127, 179, 213, 0.13);
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 20px 2vw;
+            }
+
+            .intro-card {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 20px 10px 20px 0;
+            }
+
+            .intro-content {
+                padding-right: 0;
+            }
+
+            .intro-photo {
+                margin: 18px auto 0 auto;
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                top: var(--navbar-height);
+                height: calc(100vh - var(--navbar-height));
+            }
+
+            .sidebar.collapsed {
+                width: var(--sidebar-collapsed-width);
+            }
+
+            .sidebar-toggle {
+                left: var(--sidebar-collapsed-width);
+            }
+        }
+    </style>
 </head>
 
 <body>
     <!-- 顶部导航栏 -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="images/default-avatar.jpg" alt="BINNI Logo" class="d-inline-block align-text-top">
-            </a>
-            <!--<div class="ms-auto">
-                <img src="images/default-avatar.jpg" alt="Avatar" class="rounded-circle">
-            </div>-->
+            <div class="navbar-left">
+                <img src="logo/④.png" alt="头像" class="avatar">
+                <span>SOOBIN_🐇</span>
+            </div>
+            <div class="navbar-right">
+                BINNI_1205
+            </div>
         </div>
     </nav>
 
-    <!-- 主要内容容器 -->
-    <div class="main-container">
-        <!-- 侧边栏 -->
-        <nav id="sidebar" class="sidebar">
-            <div class="position-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#photoSubmenu">
-                            <i class="fas fa-images"></i>
-                            <span>照片集</span>
-                        </a>
-                        <div class="collapse" id="photoSubmenu">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages/ig.html">
-                                        <i class="fab fa-instagram"></i>
-                                        <span>IG</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages/wvs.html">
-                                        <i class="fas fa-camera"></i>
-                                        <span>WVS</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="pages/x.html">
-                                        <i class="fab fa-twitter"></i>
-                                        <span>X</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pages/video.html">
-                            <i class="fas fa-video"></i>
-                            <span>直拍</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-tv"></i>
-                            <span>综艺</span>
-                        </a>
-                    </li>
-                </ul>
+    <!-- 侧边栏 -->
+    <nav id="sidebar" class="sidebar">
+        <div class="windchime windchime-collapsed" id="windchime">
+            <div class="windchime-string"></div>
+            <img src="logo/①.png" alt="收缩logo" class="windchime-logo" id="windchimeLogo">
+            <div class="windchime-plates" id="windchimePlates" style="display:none;">
+                <!-- 四大分类 -->
+                <div class="windchime-plate" data-plate="photo">
+                    <img src="logo/②.png" class="plate-logo" alt="logo2">
+                    照片集
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="windchime-subplates" data-parent="photo" style="display:none;">
+                    <div class="windchime-subplate" data-subplate="IG">IG</div>
+                    <div class="windchime-subplate" data-subplate="X">X</div>
+                    <div class="windchime-subplate" data-subplate="Facebook">Facebook</div>
+                    <div class="windchime-subplate" data-subplate="wvs">wvs</div>
+                </div>
+                <div class="windchime-plate" data-plate="video">
+                    <img src="logo/②.png" class="plate-logo" alt="logo2">
+                    直拍
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="windchime-subplates" data-parent="video" style="display:none;">
+                    <div class="windchime-subplate" data-subplate="SBS">SBS</div>
+                    <div class="windchime-subplate" data-subplate="MusicBank">Music Bank</div>
+                    <div class="windchime-subplate" data-subplate="Mnet">Mnet</div>
+                </div>
+                <div class="windchime-plate" data-plate="variety">
+                    <img src="logo/②.png" class="plate-logo" alt="logo2">
+                    综艺
+                    <span class="arrow">▶</span>
+                </div>
+                <div class="windchime-subplates" data-parent="variety" style="display:none;">
+                    <div class="windchime-subplate" data-subplate="最最1">最最 第一季</div>
+                    <div class="windchime-subplate" data-subplate="最最2">最最 第二季</div>
+                    <div class="windchime-subplate" data-subplate="TODO">TODO</div>
+                </div>
+                <div class="windchime-plate" data-plate="other">
+                    <img src="logo/②.png" class="plate-logo" alt="logo2">
+                    其他
+                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- 侧边栏切换按钮 -->
-        <button class="sidebar-toggle" id="sidebarToggle">
-            <i class="fas fa-chevron-left"></i>
-        </button>
+    <!-- 侧边栏切换按钮 -->
+    <button class="sidebar-toggle" id="sidebarToggle">
+        <i class="fas fa-chevron-left"></i>
+    </button>
 
-        <!-- 主要内容区域 -->
-        <main class="main-content">
-            <div class="content-card">
-                <h1>欢迎来到BINNI的网站</h1>
-                <p>这里是一个充满活力的个人空间，记录着精彩瞬间。</p>
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="home-header">
+            <img src="logo/⑩.png" class="logo10" alt="logo10">
+            <span class="title">泥嚎，我是酥饼~</span>
+        </div>
+        <div class="home-subheader">
+            <span>👇下面是我的个人简介</span>
+            <img src="logo/⑦.png" class="logo7" alt="logo7">
+        </div>
+        <div class="intro-card">
+            <img src="logo/⑥.png" class="logo6" alt="logo6">
+            <div class="intro-content">
+                <div>姓名：崔秀彬</div>
+                <div>生日：2000-12-05</div>
+                <div>国籍：韩国</div>
+                <div>爱好：冰激凌、LOL、Kara</div>
+                <div>从业经历：</div>
+                <div style="margin-left:1em;">从五个冰激凌的面试开始进入Bighit</div>
+                <div style="margin-left:1em;">2019.03.04以组合TXT（Tomorrow XTogether）队长身份出道</div>
+                <div style="margin-left:1em;">……（后续补充）</div>
             </div>
-            <div class="content">
-                <!-- 内容将在这里动态加载 -->
-            </div>
-        </main>
-    </div>
+            <img src="logo/头像.png" class="intro-photo" alt="头像">
+        </div>
+    </main>
 
     <!-- Bootstrap Bundle with Popper -->
     <script src="lib/bootstrap.bundle.min.js"></script>
     <!-- Custom JavaScript -->
     <script src="js/main.js"></script>
     <script>
-        // 侧边栏切换功能
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
+        // 风铃侧边栏交互
+        const windchime = document.getElementById('windchime');
+        const windchimeLogo = document.getElementById('windchimeLogo');
+        const windchimePlates = document.getElementById('windchimePlates');
+        let expanded = false;
+        windchimeLogo.onclick = function () {
+            expanded = !expanded;
+            windchime.className = 'windchime ' + (expanded ? 'windchime-expanded' : 'windchime-collapsed');
+            windchimePlates.style.display = expanded ? 'flex' : 'none';
+            windchimeLogo.src = expanded ? 'logo/⑧.png' : 'logo/①.png';
+        };
+        // 木牌点击展开/收起子目录
+        document.querySelectorAll('.windchime-plate').forEach(function (plate) {
+            plate.onclick = function () {
+                const key = plate.getAttribute('data-plate');
+                document.querySelectorAll('.windchime-plate').forEach(p => p.classList.remove('active'));
+                plate.classList.add('active');
+                document.querySelectorAll('.windchime-subplates').forEach(sub => {
+                    if (sub.getAttribute('data-parent') === key) {
+                        sub.style.display = sub.style.display === 'block' ? 'none' : 'block';
+                    } else {
+                        sub.style.display = 'none';
+                    }
+                });
+            };
+        });
+        // 子目录点击高亮
+        document.querySelectorAll('.windchime-subplate').forEach(function (subplate) {
+            subplate.onclick = function (e) {
+                document.querySelectorAll('.windchime-subplate').forEach(s => s.classList.remove('active'));
+                subplate.classList.add('active');
+                // TODO: 跳转到对应页面
+            };
+        });
+        // 侧边栏收缩按钮
+        document.getElementById('sidebarToggle').onclick = function () {
             document.getElementById('sidebar').classList.toggle('collapsed');
-            this.querySelector('i').classList.toggle('fa-chevron-left');
-            this.querySelector('i').classList.toggle('fa-chevron-right');
-        });
-
-        // 移动端响应式处理
-        function handleResize() {
-            const sidebar = document.getElementById('sidebar');
-            const toggle = document.getElementById('sidebarToggle');
-
-            if (window.innerWidth < 768) {
-                sidebar.classList.add('collapsed');
-                toggle.style.display = 'flex';
-            } else {
-                toggle.style.display = 'flex';
-            }
-        }
-
-        // 初始化和窗口大小改变时处理
-        window.addEventListener('resize', handleResize);
-        handleResize();
-
-        // 子菜单展开/收起逻辑
-        document.addEventListener('DOMContentLoaded', function () {
-            const photoSubmenu = document.getElementById('photoSubmenu');
-            const photoLink = document.querySelector('[data-bs-target="#photoSubmenu"]');
-
-            // 点击父菜单时切换子菜单的显示状态
-            photoLink.addEventListener('click', function (e) {
-                e.preventDefault();
-                photoSubmenu.classList.toggle('show');
-            });
-
-            // 如果当前在子页面，自动展开子菜单
-            const currentPath = window.location.pathname;
-            if (currentPath.includes('ig.html') || currentPath.includes('wvs.html') || currentPath.includes('x.html')) {
-                photoSubmenu.classList.add('show');
-            }
-        });
+            document.querySelector('.main-content').classList.toggle('sidebar-collapsed');
+        };
     </script>
 </body>
 
